@@ -5,6 +5,9 @@ feature cmd "command -v memcached >/dev/null"
 process p1 "exec memcached -u nobody -p -1 -U 0" -start
 
 shell {${vmod_topsrc}/src/tests/gen-vcl.sh ${p1_pid} "--SERVER=@SERVER@"}
+shell {
+	lsof -p ${p1_pid}
+}
 
 server s1 {
 	rxreq
